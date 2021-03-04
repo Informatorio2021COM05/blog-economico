@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>s k a l a</title>
-</head>
-<body>
-    <div>
-        <h1><strong>Bienvenidos a ·s k a l a· </strong></h1>
-        <br>
-        <br>
-        <p>Un blog sobre Economía, Liberalismo y próceres argentinos</p>
-        {% for post in posts %}
-            <div>
-                <p> publicado: {{ post.published_date }}</p>
-                <h2><a href="">{{ post.title }}</a></h2>
-                <p>{{ post.text|linebreaksbr }}</p>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
             </div>
-        {% endfor %}
-    
-</body>
-</html>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}" class="card" style="background-color: rgb(230, 212, 212); color: black; padding-left: 2rem; margin-top: 1rem;">{{ post.title }}</a></h2>
+            <p class="container" style="text-align: justify;">{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
